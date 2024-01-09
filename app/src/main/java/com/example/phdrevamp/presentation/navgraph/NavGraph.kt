@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
+import com.example.phdrevamp.domain.homenavigation.HomeNavigation
 import com.example.phdrevamp.presentation.login.LoginScreen
 import com.example.phdrevamp.presentation.login.LoginViewModel
 import com.example.phdrevamp.presentation.register.RegisterScreen
@@ -27,7 +28,6 @@ fun NavGraph(
                     event = viewModel::onEvent,
                     state = state,
                     actionForgotPassword = { },
-                    actionLogin = { },
                     actionRegister = {
                         navController.navigate(route = Route.RegisterScreen.route)
                     },
@@ -36,6 +36,14 @@ fun NavGraph(
             }
             composable(route = Route.RegisterScreen.route) {
                 RegisterScreen(navController = navController)
+            }
+        }
+        navigation(
+            route = Route.HomeNavigation.route,
+            startDestination = Route.OnboardingScreen.route
+        ) {
+            composable(route = Route.OnboardingScreen.route) {
+                HomeNavigation()
             }
         }
     }

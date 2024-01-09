@@ -28,7 +28,6 @@ fun LoginScreen(
     event: (LoginEvent) -> Unit,
     state: LoginState,
     actionForgotPassword: () -> Unit,
-    actionLogin: () -> Unit,
     actionRegister: () -> Unit,
     clickLoginGoogle: () -> Unit
 ) {
@@ -99,7 +98,7 @@ fun LoginScreen(
             modifier = Modifier.padding(start = 16.dp, end = 16.dp),
             text = "Login",
             enableButton = state.isValid,
-            action = actionLogin
+            action = {event(LoginEvent.LoginAction)}
         )
 
         Spacer(modifier = Modifier.height(10.dp))

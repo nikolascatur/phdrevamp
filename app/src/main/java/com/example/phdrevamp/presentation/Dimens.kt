@@ -6,4 +6,5 @@ object Dimens {
      val ICON_SIZE = 24.dp
 
      val ROUNDED_CORNER_TEXT_FIELD  = 16.dp
+     val ICON_BOTTOM_NAV = 30.dp
 }

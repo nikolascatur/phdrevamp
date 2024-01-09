@@ -10,6 +10,10 @@ sealed class Route(
     object RegisterScreen : Route("RegisterScreen")
 
     object HomeNavigation : Route("HomeNavigation")
+    object OnboardingScreen: Route("OnboardingScreen")
+    object MenuScreen: Route("MenuScreen")
+    object NotifScreen: Route("NotifScreen")
+    object ProfileScreen: Route("ProfileScreen")
 
     object AppStartNavigation : Route("AppStartNavigation")
 }
