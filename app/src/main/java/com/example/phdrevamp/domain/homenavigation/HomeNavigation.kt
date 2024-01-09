@@ -1,5 +1,6 @@
 package com.example.phdrevamp.domain.homenavigation
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -23,6 +24,8 @@ import androidx.navigation.compose.rememberNavController
 import com.example.phdrevamp.R
 import com.example.phdrevamp.domain.homenavigation.component.PhdBottomNavigation
 import com.example.phdrevamp.presentation.navgraph.Route
+import com.example.phdrevamp.ui.theme.Black400
+import com.example.phdrevamp.ui.theme.Black50
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -49,25 +52,28 @@ fun HomeNavigation() {
         else -> 0
     }
 
-    Scaffold(modifier = Modifier.fillMaxSize(), bottomBar = {
-        PhdBottomNavigation(
-            items = homeNavigation,
-            selectedItem = selectedItem,
-            onItemClick = { index ->
-                when (index) {
-                    0 -> navigateToTab(navController, Route.OnboardingScreen.route)
-                    1 -> navigateToTab(navController, Route.MenuScreen.route)
-                    2 -> navigateToTab(navController, Route.NotifScreen.route)
-                    3 -> navigateToTab(navController, Route.ProfileScreen.route)
+    Scaffold(modifier = Modifier
+        .fillMaxSize()
+        .background(Black400),
+        bottomBar = {
+            PhdBottomNavigation(
+                items = homeNavigation,
+                selectedItem = selectedItem,
+                onItemClick = { index ->
+                    when (index) {
+                        0 -> navigateToTab(navController, Route.OnboardingScreen.route)
+                        1 -> navigateToTab(navController, Route.MenuScreen.route)
+                        2 -> navigateToTab(navController, Route.NotifScreen.route)
+                        3 -> navigateToTab(navController, Route.ProfileScreen.route)
+                    }
                 }
-            }
-        )
-    }) {
+            )
+        }) {
         val bottomPadding = it.calculateBottomPadding()
         NavHost(
             navController = navController,
             startDestination = Route.OnboardingScreen.route,
-            modifier = Modifier.padding(bottomPadding)
+            modifier = Modifier.fillMaxSize().background(Black50).padding(bottomPadding)
         ) {
             composable(Route.OnboardingScreen.route) {
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
