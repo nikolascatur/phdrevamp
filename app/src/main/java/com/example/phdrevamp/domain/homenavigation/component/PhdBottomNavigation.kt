@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -51,7 +50,12 @@ fun PhdBottomNavigation(
                 selected = index == selectedItem,
                 onClick = { onItemClick(index) },
                 icon = {
-                    Box(modifier = Modifier.height(50.dp).width(25.dp), contentAlignment = Alignment.Center) {
+                    Box(
+                        modifier = Modifier
+                            .height(50.dp)
+                            .width(25.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
                         Icon(
                             painter = painterResource(id = icon),
                             contentDescription = null,

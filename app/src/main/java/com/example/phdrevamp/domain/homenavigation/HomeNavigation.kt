@@ -24,6 +24,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.phdrevamp.R
 import com.example.phdrevamp.domain.homenavigation.component.PhdBottomNavigation
 import com.example.phdrevamp.presentation.navgraph.Route
+import com.example.phdrevamp.presentation.onboarding.OnBoardingScreen
 import com.example.phdrevamp.ui.theme.Black400
 import com.example.phdrevamp.ui.theme.Black50
 
@@ -73,24 +74,22 @@ fun HomeNavigation() {
         NavHost(
             navController = navController,
             startDestination = Route.OnboardingScreen.route,
-            modifier = Modifier.fillMaxSize().background(Black50).padding(bottomPadding)
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Black50)
+                .padding(bottom = bottomPadding)
         ) {
             composable(Route.OnboardingScreen.route) {
-                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    Text(
-                        text = "ON Boarding Screen",
-                        style = MaterialTheme.typography.headlineLarge
-                    )
-                }
+                OnBoardingScreen()
             }
             composable(Route.MenuScreen.route) {
-                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Box(modifier = Modifier.fillMaxSize()) {
                     Text(text = "Menu Screen", style = MaterialTheme.typography.headlineLarge)
                 }
 
             }
             composable(Route.NotifScreen.route) {
-                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Box(modifier = Modifier.fillMaxSize()) {
                     Text(
                         text = "Notification Screen",
                         style = MaterialTheme.typography.headlineLarge
@@ -99,7 +98,7 @@ fun HomeNavigation() {
 
             }
             composable(Route.ProfileScreen.route) {
-                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Box(modifier = Modifier.fillMaxSize()) {
                     Text(text = "Profile Screen", style = MaterialTheme.typography.headlineLarge)
                 }
             }
