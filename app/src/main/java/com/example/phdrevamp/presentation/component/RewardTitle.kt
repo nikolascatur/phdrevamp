@@ -22,9 +22,9 @@ import com.example.phdrevamp.ui.theme.PHDRed500
 import com.example.phdrevamp.ui.theme.PhdrevampTheme
 
 @Composable
-fun RewardTitle(rewardValue: String) {
+fun RewardTitle(modifier: Modifier = Modifier,rewardValue: String) {
 
-    Row(modifier = Modifier) {
+    Row(modifier = modifier) {
         Icon(
             modifier = Modifier.size(ICON_BOTTOM_NAV),
             painter = painterResource(id = R.drawable.ic_pizza),

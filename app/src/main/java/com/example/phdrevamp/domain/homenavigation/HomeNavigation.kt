@@ -9,6 +9,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
@@ -16,13 +17,18 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import androidx.navigation.activity
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.phdrevamp.R
 import com.example.phdrevamp.domain.homenavigation.component.PhdBottomNavigation
+import com.example.phdrevamp.presentation.menu.MenuScreen
+import com.example.phdrevamp.presentation.menu.MenuViewModel
 import com.example.phdrevamp.presentation.navgraph.Route
 import com.example.phdrevamp.presentation.onboarding.OnBoardingScreen
 import com.example.phdrevamp.ui.theme.Black400
@@ -83,10 +89,10 @@ fun HomeNavigation() {
                 OnBoardingScreen()
             }
             composable(Route.MenuScreen.route) {
-                Box(modifier = Modifier.fillMaxSize()) {
-                    Text(text = "Menu Screen", style = MaterialTheme.typography.headlineLarge)
-                }
-
+                val viewModel: MenuViewModel = hiltViewModel()
+                viewModel.callMenu()
+                val state = viewModel.state.collectAsState().value
+                MenuScreen(navHostController = navController, state = state, event = viewModel::onEvent)
             }
             composable(Route.NotifScreen.route) {
                 Box(modifier = Modifier.fillMaxSize()) {

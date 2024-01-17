@@ -15,9 +15,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -38,6 +39,7 @@ fun OnBoardingScreen() {
     val scrollState = rememberPagerState(initialPage = 1) {
         bestDeals.size
     }
+    val scrollVertical = rememberScrollState()
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -63,69 +65,61 @@ fun OnBoardingScreen() {
             }
         }
         Spacer(modifier = Modifier.height(14.dp))
-        SearchBar(
-            modifier = Modifier.padding(start = 13.dp, end = 13.dp),
-            text = "",
-            onValueChange = {}) {
+        Column(modifier = Modifier.verticalScroll(scrollVertical), content = {
+            SearchBar(
+                modifier = Modifier.padding(start = 13.dp, end = 13.dp),
+                text = "",
+                onValueChange = {}) {
 
-        }
-        Spacer(modifier = Modifier.height(12.dp))
-        LazyColumn(content = {
-            item {
-                Box(modifier = Modifier.padding(start = 18.dp)) {
-                    Text(text = "Category")
+            }
+            Spacer(modifier = Modifier.height(12.dp))
+            Box(modifier = Modifier.padding(start = 18.dp)) {
+                Text(text = "Category")
+            }
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 10.dp, bottom = 10.dp),
+                horizontalArrangement = Arrangement.SpaceAround
+            ) {
+                icon.forEach {
+                    ImageTextBottom(image = it.first, text = it.second)
                 }
             }
-            item {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 10.dp, bottom = 10.dp),
-                    horizontalArrangement = Arrangement.SpaceAround
+            Box(modifier = Modifier.padding(start = 18.dp)) {
+                Text(text = "Best Deals")
+            }
+            Row(
+                modifier = Modifier.scrollable(
+                    state = scrollState, orientation = Orientation.Horizontal
+                ),
+                horizontalArrangement = Arrangement.spacedBy(10.dp)
+            ) {
+                HorizontalPager(
+                    state = scrollState,
+                    contentPadding = PaddingValues(horizontal = 10.dp),
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    icon.forEach {
-                        ImageTextBottom(image = it.first, text = it.second)
+                    Box(modifier = Modifier.height(260.dp)) {
+                        Image(
+                            painter = painterResource(id = bestDeals[it]),
+                            contentDescription = null
+                        )
                     }
                 }
             }
-            item {
-                Box(modifier = Modifier.padding(start = 18.dp)) {
-                    Text(text = "Best Deals")
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 20.dp),
+                horizontalArrangement = Arrangement.SpaceAround
+            ) {
+                menus.forEach {
+                    ButtonIconText(icon = it.first, text = it.second)
                 }
             }
-            item {
-                Row(
-                    modifier = Modifier.scrollable(
-                        state = scrollState, orientation = Orientation.Horizontal
-                    ),
-                    horizontalArrangement = Arrangement.spacedBy(10.dp)
-                ) {
-                    HorizontalPager(
-                        state = scrollState,
-                        contentPadding = PaddingValues(horizontal = 10.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Box(modifier = Modifier.height(260.dp)) {
-                            Image(
-                                painter = painterResource(id = bestDeals[it]),
-                                contentDescription = null
-                            )
-                        }
-                    }
-                }
-            }
-            item {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 20.dp),
-                    horizontalArrangement = Arrangement.SpaceAround
-                ) {
-                    menus.forEach {
-                        ButtonIconText(icon = it.first, text = it.second)
-                    }
-                }
-            }
+            Spacer(modifier = Modifier.height(50.dp))
+
         })
 
     }

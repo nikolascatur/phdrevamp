@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">phdrevamp</string>
+    <string name="calculator_result">Rp %1s</string>
+    <string name="currency_separator">.</string>
 </resources>
