@@ -132,9 +132,7 @@ fun MenuScreen(
                         )
                         val context = LocalContext.current
 
-                        Log.d("okhttp","nikoo ${state.selectedMenuCategory}")
                         state.mapMenu[state.selectedMenuCategory]?.let { menus ->
-                            Log.d("okhttp","nikoo menuSizee ${menus.size}")
                             LazyVerticalGrid(columns = GridCells.Fixed(2), content = {
                                 items(menus.size) {
                                     val menu = menus[it]
