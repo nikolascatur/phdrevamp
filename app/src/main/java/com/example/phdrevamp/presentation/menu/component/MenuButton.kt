@@ -46,6 +46,8 @@ fun MenuButton(
         constrain(menuInfo) {
             top.linkTo(image.bottom)
             bottom.linkTo(image.bottom)
+            start.linkTo(image.start)
+            end.linkTo(image.end)
         }
     }
     ConstraintLayout(constraintSet = constraintSet) {
